@@ -1,24 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState} from 'react';
+import SideBar from './Componets/SideBar'
+import ListingCard from './Componets/ListingCard'
+import clickedContext from './Componets/ClickedContex';
+import TopHeader from './Componets/TopHeader';
 
 function App() {
+  const [clickedCountry, setClickedCountry] = useState('USA');
+
+  const clickHandler = (country) => {
+    //console.log(country)
+    setClickedCountry(country);
+  }
   return (
+    <clickedContext.Provider value={clickedCountry}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TopHeader/>
+      <div className='container'>
+      <SideBar click= {clickHandler}/>
+      <ListingCard/>
+      </div>
     </div>
+    </clickedContext.Provider>
   );
 }
 
